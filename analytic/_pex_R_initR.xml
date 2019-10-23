@@ -6,7 +6,7 @@
     value "\\l rinit.q";
     
     .log.out[.z.h;"Initialising the qqplot functionality ";()];
-    .al.callfunction[`.app.R.initQQPlotFunctions][];
+    .al.callfunction[`.pex.R.initQQPlotFunctions][];
     .al.callfunction[`.pex.R.initRScript][];
 	}</code_text>
 	<description></description>
