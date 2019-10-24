@@ -1,0 +1,27 @@
+<schema>
+	<ucname>delta_install_default</ucname>
+	<table>batchExc</table>
+	<description></description>
+	<column>
+		<column>dt</column>
+		<coltype>Timestamp</coltype>
+		<default></default>
+		<attribute></attribute>
+		<description></description>
+	</column>
+	<column>
+		<column>btCde</column>
+		<coltype>Symbol</coltype>
+		<default></default>
+		<attribute></attribute>
+		<description></description>
+	</column>
+	<column>
+		<column>cmt</column>
+		<coltype>String</coltype>
+		<default></default>
+		<attribute></attribute>
+		<description></description>
+	</column>
+	<schemagroup>PeX_Schemas</schemagroup>
+</schema>
