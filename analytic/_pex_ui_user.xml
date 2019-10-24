@@ -10,21 +10,6 @@
     };
 // .pex.ui.user.getUserRoles[]
 
-//.pex.ui.user.getAllUsers:{[]
-// Get list of user names
-//userList:.px.upd.getUsers[`ALL][`name] except .pex.ui.user.userExcluseList;
-// Result table to return
-//userRoleTab:([]user:();role:());
-// Loop thorugh all the users and get their roles
-//userRoleTab:userRoleTab uj raze {[u]
-//        r:.px.pm.getUser[u][`groups];
-//        :([]user:(count r)#u;role:r);
-//        }each userList;
-// Delete roles which are not relevant to PeX
-//userRoleTab:delete from userRoleTab where not role in key .pex.ui.user.userGroupRoleMapping;
-//:userRoleTab
-//}
-
 // Get all the users and their roles
 .pex.ui.user.getAllUsers:{[]
     
@@ -40,8 +25,7 @@
     :userRoleTab;
     };
 
-
-.pex.ui.user.getAllUsers[]
+// .pex.ui.user.getAllUsers[]
 
 // Create User should take dict with keys - username, useremail, userpass, userrole.
 // dict:`username`useremail`userpass`userrole!(`pdoo;`$"pd@kx.com";`testpas1;`$"Data Steward")
@@ -93,6 +77,8 @@
     .log.out[.z.h;"Adding user to group ";(username;userrole)];
     .px.pm.setUserGroups[username;userrole];
     
+    :"User Role updated ",(string username),":",(string userrole);
+    
     };
 // .pex.ui.user.updateRole[`username`userrole!(`pdoo7;`$"Power User")]
 
@@ -101,10 +87,14 @@
 .pex.ui.user.resetPassword:{[dict]
     username:dict[`username];
     userpass:dict[`userpass];
-    
-    .log.out[.z.h;"Updating password for user ";username];
-    .px.pm.resetPassword[username;userpass];
-    
+
+    .log.out[.z.h;"Updating password for user ";(username;userpass)];
+    res:.[.px.pm.resetPassword;(username;userpass);{(`err;x)}];
+    if[res[0]~`err;
+        .log.err[.z.h;"Unable to update password ";res[1]];
+        :res[1];
+        ];
+    :"Password updated";
     };
 // .pex.ui.user.resetPassword[`username`userpass!(`pdoo7;`pass90Y)]
      
@@ -171,10 +161,7 @@
     
     // Update global mapping table that can be used for permissions
     .pex.usrSiteMapping:.pex.ui.util.usrSiteEmptyTab;
-    
-    // update ALL site permission for any users that don't have specific site level permissions
-    update ALL:1b from `.pex.usrSiteMapping where not User in .pex.ui.util.usrSiteGrp[`usr];
-    
+        
     // Create mapping dictionary for permissions check
     .pex.pem.usrSitePermissions:(.pex.ui.util.usrSiteGrp[`usr])!(.pex.ui.util.usrSiteGrp[`site]);    
     :.pex.usrSiteMapping;
@@ -182,6 +169,13 @@
 
 // Update empty site mapping table with actual permissions
 .pex.ui.util.updateEmptyUserSiteMappingTab:{[usr;siteList]
+        
+    // if ALL in siteList then update the site List to be everything
+    if[`ALL in siteList;
+        .log.out[.z.h;"Updating all sites for user :";usr];
+        siteList:2_cols .pex.ui.util.usrSiteEmptyTab;
+        ];
+    
     siteDict:()!();
     siteDict[siteList]:(count siteList)#1b;
     .log.out[.z.h;"Updating user site permissions for ";(usr;siteList)];
@@ -204,10 +198,23 @@
 .pex.ui.user.updateUserSiteMapping:{[uiTab]
 
     .log.out[.z.h;"Updating User Site Mapping Table ";()];
+    res:([]usr:();site:());
+
+    // First select any users that have permission to all sites
+    usrALL:select User from uiTab where ALL;
+    if[count usrALL;
+        uList:usrALL[`User];
+        aList:(count uList)#`ALL;
+        .log.out[.z.h;"Updating for users will ALL permissions";uList];
+        res:res upsert ([]usr:uList;site:aList);
+        uiTab:delete from uiTab where ALL; 
+        ];
+
+    // Now update permissions for those users that do not have permission to all sites
     sList:3_cols uiTab;
     sFilt:uiTab[sList];
     uList:uiTab[`User];
-    res:`usr`site xcols raze {[uList;site;siteFilter]
+    res:res upsert `usr`site xcols raze {[uList;site;siteFilter]
         if[count where siteFilter;
             :([]site:site;usr:uList[where siteFilter]);
             ];
@@ -217,7 +224,7 @@
     .log.out[.z.h;"Commiting Update for User Site Mapping Table ";()];
     .uc.editActiveSingleParamData[`PeX_CP_UserSiteMapping;`EnvironmentOverride;res];
     
-    .pex.usrSiteMapping:uiTab;
+    //.pex.usrSiteMapping:uiTab;
     };
 
 // Save Rspec

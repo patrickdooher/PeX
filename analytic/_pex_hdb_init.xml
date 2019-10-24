@@ -21,10 +21,22 @@
     .log.out[.z.h;"Loading R initisation ";()];
     .al.callfunction[`.pex.R.initR][];
     
+    .al.getfunction[`.pex.ui.user.updateUserSiteMappingUI];
+    
     // Getting Site Level Permissions
     .uc.getAndSaveActiveParamValue[`PeX_CP_UserSiteMapping;`EnvironmentOverride;`.pex.ui.util.usrSite;enlist[`action]!enlist (`.pex.ui.util.updateUsrSiteMappingCfg;`)];
     .pex.ui.util.updateUsrSiteMappingCfg[];
+    
+    MasterBatchOut::("ssssddsesc";enlist ",") 0: `$"/home/kx_user/SampleData/MasterBatchOut_SGO.csv";
+    MasterInsp::("sid*sssssffffffffissssssdd*";enlist ",") 0: `$":/home/kx_user/SampleData/MasterInsp_SGO.csv";
+    MasterMaterialOut::("sssd*s*ss*sb**";enlist ",") 0: `$":/home/kx_user/SampleData/MasterMaterialOut_SGO.csv"; 
+    MasterMattoInspMap::("sssdsssssi*";enlist ",") 0: `$":/home/kx_user/SampleData/MasterMattoInspMap_SGO.csv";
+    MasterSiteOut::("s*s*";enlist ",") 0: `$":/home/kx_user/SampleData/MasterSiteOut_SGO.csv";     
+    QA_Measurements::("ssssdjsjdifsfisffs*";enlist ",") 0: `$"/home/kx_user/SampleData/QA_Measurements_SGO.csv";
 
+    BatchMfgDateMap::`BatchCode xkey select BatchCode, MfgDate from MasterBatchOut;
+    InspCodeAttMap::select last Attribute by InspCode from MasterMattoInspMap;
+    
 	}</code_text>
 	<description></description>
 	<dictionaryparams>0</dictionaryparams>
