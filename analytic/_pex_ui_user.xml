@@ -58,6 +58,10 @@
     // Now that user has been created - add them to the relevant usergroup
     .pex.ui.user.updateRole[dict];
     .log.out[.z.h;"User Created ";(username;userrole)];
+    
+    // Now recreated the site level permissions tables
+    .pex.ui.util.updateUsrSiteMappingCfg[];
+    
     :`$"User '",(string username)," : ",(string dict[`userrole]),"' created";
 
  };
@@ -236,11 +240,12 @@
     mic:rSpecDict[`mic];
     attribute:rSpecDict[`attribute];
 
-    rSpecID:`$"PEX_",string 1+exec max RspecName from select "I"$ -1 sublist'string RspecName from RspecHeader;
+    rSpecID:`$"PEX_",string 1+ max "I"$last each "_" vs ' string RspecHeader[`RspecName];
     
     `RspecHeader upsert (rSpecID;`$"1.0";`;`Private;.z.D;.z.D;.pm.u;`$string .z.Z;1b;`;`;`);
     `RspecDetails upsert (`$"10";rSpecID;`$"1.0";inspectionType;material;site;`;.z.D;`;`;`;`;0f;0f;0f;0f;0f;0f;0f;0f;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`;`);
-    
+     
+    .log.out[.z.h;"Rspec Created ";rSpecID];
     :rSpecID;
     };</code_text>
 	<description>.pex.ui.user functions

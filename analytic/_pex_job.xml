@@ -22,6 +22,8 @@
     `.pex.job.jobList upsert  (newJobID, (value dictNewJob), .z.D,.pm.u);
     
     .pex.job.createJobSchedule[newJobID];
+    
+    :newJobID;
 
    };
 
