@@ -1,0 +1,38 @@
+<analytic>
+	<analytic>.pex.ui.rspec.batchCmt</analytic>
+	<code_text>{[btCode;batCom]
+	batCom:`$batCom;
+    aa:count btCode;
+    $[not aa ~1;
+         res:([]dt:.z.P;btCde:btCode;cmt:batCom);
+        res:([]enlist dt:.z.P;btCde:btCode;cmt:batCom)
+    ];
+    res1:`btCde xkey res;
+    `batchExc upsert res1
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

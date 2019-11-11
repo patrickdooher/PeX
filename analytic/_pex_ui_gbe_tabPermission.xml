@@ -1,0 +1,30 @@
+<analytic>
+	<analytic>.pex.ui.gbe.tabPermission</analytic>
+	<code_text>{[globalTabPermission]
+    uname:.pm.u;
+ 
+    users:.pex.ui.user.getAllUsers[];
+    r:select role from users where user = uname;
+    roleCheck:`PeX_UG_Goverance in r;
+    $[roleCheck;globalTabPermission:1b;globalTabPermission:0b]
+
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>globalTabPermission</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Boolean</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

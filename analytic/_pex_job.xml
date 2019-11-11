@@ -41,22 +41,21 @@
     };
 
 // Create Job Schedule
-.pex.job.createJobSchedule:{[jID]
-    jDetails:() xkey select from .pex.job.jobList where jobID = jID;
+.pex.job.createJobSchedule:{[jID]jDetails:() xkey select from .pex.job.jobList where jobID = jID;
     // Need to update to check for months/years and not just days (move to utility fuctions)
     $[first jDetails[`plotPerFreq] = `days; plotFunc:{[x;y] y-x}; first jDetails[`plotPerFreq] = `weeks; plotFunc:{[x;y] y-(7*x)}; first jDetails[`plotPerFreq] = `months; plotFunc:{[x;y] .Q.addmonths[y;-1*x]}; first jDetails[`plotPerFreq] = `years; plotFunc:{[x;y] .Q.addmonths[y;-12*x]}];
     $[first jDetails[`revPerFreq] = `days; revFunc:{[x;y] y-x}; first jDetails[`revPerFreq] = `weeks; revFunc:{[x;y] y-(7*x)}; first jDetails[`revPerFreq] = `months; revFunc:{[x;y] .Q.addmonths[y;-1*x]}; first jDetails[`revPerFreq] = `years; revFunc:{[x;y] .Q.addmonths[y;-12*x]}];
     $[first jDetails[`waitPerFreq] = `days; waitFunc:{[x;y] y-x}; first jDetails[`waitPerFreq] = `weeks; waitFunc:{[x;y] y-(7*x)}; first jDetails[``waitPerFreq] = `months; waitFunc:{[x;y] .Q.addmonths[y;-1*x]}; first jDetails[`waitPerFreq] = `years; waitFunc:{[x;y] .Q.addmonths[y;-12*x]}];
     $[first jDetails[`statPerFreq] = `days; statFunc:{[x;y] y-x}; first jDetails[`statPerFreq] = `weeks; statFunc:{[x;y] y-(7*x)}; first jDetails[`statPerFreq] = `months; statFunc:{[x;y] .Q.addmonths[y;-1*x]}; first jDetails[`statPerFreq] = `years; statFunc:{[x;y] .Q.addmonths[y;-12*x]}];
-    $[first jDetails[`revPerFreq] = `days; revMod:1; first jDetails[`revPerFreq] = `weeks; revMod:7; first jDetails[`revPerFreq] = `months; revMod:30; first jDetails[`revPerFreq] = `years; revMod:365];
-    noExecutions:first floor (jDetails[`execExpiryDt]-jDetails[`dtCreated] )%(revMod*jDetails[`revPer]);
+    $[first jDetails[`statPerFreq] = `days; statMod:1; first jDetails[`statPerFreq] = `weeks; statMod:7; first jDetails[`statPerFreq] = `months; statMod:30; first jDetails[`statPerFreq] = `years; statMod:365];
+    noExecutions:first floor (jDetails[`execExpiryDt]-jDetails[`dtCreated] )%(statMod*jDetails[`statPer]);
     if[not noExecutions &gt; 0;
         strErr:"No jobs to schedule ";
         .log.err[.z.h;strErr;(jDetails[`execExpiryDt];jDetails[`dtCreated])];
         :`$strErr;
         ];
     /execSchedule:(first jDetails[`dtCreated]+jDetails[`waitPer])+(first jDetails[`revPer])*til noExecutions;
-    execSchedule: revFunc[-1*((first jDetails[`revPer])*til noExecutions);waitFunc[-1*first jDetails[`waitPer];first jDetails[`dtCreated]]];
+    execSchedule: statFunc[-1*((first jDetails[`statPer])*til noExecutions);waitFunc[-1*first jDetails[`waitPer];first jDetails[`dtCreated]]];
     plotEndDtList:revEndDtList:statEndDtList:waitFunc[(first jDetails[`waitPer]);execSchedule];
     plotStartDtList:plotFunc[(first jDetails[`plotPer]);plotEndDtList];
     revStartDtList:revFunc[(first jDetails[`revPer]);revEndDtList];

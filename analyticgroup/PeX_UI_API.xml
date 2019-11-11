@@ -1,16 +1,39 @@
 <analyticgroup>
 	<name>PeX_UI_API</name>
 	<parameter>ignore</parameter>
-	<analytic>.pex.ui.Rspec.QQPlot</analytic>
-	<analytic>.pex.ui.Rspec.add</analytic>
-	<analytic>.pex.ui.Rspec.btData</analytic>
-	<analytic>.pex.ui.Rspec.hist</analytic>
 	<analytic>.pex.ui.Rspec.remove</analytic>
 	<analytic>.pex.ui.Rspec.save</analytic>
-	<analytic>.pex.ui.Rspec.select</analytic>
-	<analytic>.pex.ui.Rspec.stat</analytic>
 	<analytic>.pex.ui.Rspec.table</analytic>
 	<analytic>.pex.ui.Rspec.upsert</analytic>
-	<analytic>.pex.ui.Rspec.usrTab</analytic>
+	<analytic>.pex.ui.gbe.excTab</analytic>
+	<analytic>.pex.ui.gbe.exclusion</analytic>
+	<analytic>.pex.ui.gbe.runExcTab</analytic>
+	<analytic>.pex.ui.gbe.tabPermission</analytic>
+	<analytic>.pex.ui.gile.excTab</analytic>
+	<analytic>.pex.ui.gile.exclusion</analytic>
+	<analytic>.pex.ui.gile.runExcTab</analytic>
+	<analytic>.pex.ui.rspec.QQPlot</analytic>
+	<analytic>.pex.ui.rspec.add</analytic>
+	<analytic>.pex.ui.rspec.batchCmt</analytic>
+	<analytic>.pex.ui.rspec.batchData</analytic>
+	<analytic>.pex.ui.rspec.bthExcTab</analytic>
+	<analytic>.pex.ui.rspec.cChartBars</analytic>
+	<analytic>.pex.ui.rspec.cChartData</analytic>
+	<analytic>.pex.ui.rspec.cChartLimits</analytic>
+	<analytic>.pex.ui.rspec.cChartN1</analytic>
+	<analytic>.pex.ui.rspec.cChartN2</analytic>
+	<analytic>.pex.ui.rspec.cChartN3</analytic>
+	<analytic>.pex.ui.rspec.cChartN4</analytic>
+	<analytic>.pex.ui.rspec.cChartScale</analytic>
+	<analytic>.pex.ui.rspec.histogram</analytic>
+	<analytic>.pex.ui.rspec.inspExcTab</analytic>
+	<analytic>.pex.ui.rspec.onlineCPTab</analytic>
+	<analytic>.pex.ui.rspec.selectLI</analytic>
+	<analytic>.pex.ui.rspec.stats</analytic>
+	<analytic>.pex.ui.rspec.usrTab</analytic>
+	<analytic>.pex.ui.sched.allRuns</analytic>
+	<analytic>.pex.ui.sched.confirm</analytic>
+	<analytic>.pex.ui.sched.nextRuns</analytic>
+	<analytic>.pex.ui.sched.saveJob</analytic>
 	<visibility>private</visibility>
 </analyticgroup>

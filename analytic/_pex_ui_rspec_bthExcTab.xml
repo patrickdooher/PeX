@@ -1,0 +1,65 @@
+<analytic>
+	<analytic>.pex.ui.rspec.bthExcTab</analytic>
+	<code_text>{[sID;matCode;inspTy;att;stPlot;enPlot]
+    
+    qaDict:`sID`matCode`inspTy`att`stPlot`enPlot!(sID;matCode;inspTy;att;stPlot;enPlot);
+    res:.pex.util.getQADataSet[qaDict];
+    res:select BatchCode:`$BatchID, MfgDate:Date, InspLot:`$string InspLot, Val:Value, RawVal:RawValue from res;
+    update ix7:i from res
+    
+    
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>sID</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>matCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>inspTy</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>att</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>stPlot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>enPlot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

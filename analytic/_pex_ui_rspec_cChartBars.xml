@@ -1,0 +1,99 @@
+<analytic>
+	<analytic>.pex.ui.rspec.cChartBars</analytic>
+	<code_text>{[dict;btCode;batCom;inLot;insCmt;maxVal]
+	qaDict:dict;
+    sID:dict[`sID];
+    matCode:dict[`matCode];
+    inspTy:dict[`inspTy];
+    att:dict[`att];
+    stPlot:dict[`stPlot];
+    enPlot:dict[`enPlot];
+    stRev:dict[`stRev];
+    enRev:dict[`enRev];
+    stStat:dict[`stStat];
+    enStat:dict[`enStat];
+
+    res:.pex.util.getQADataSet[qaDict];
+
+    res5:select BatchCode:`$BatchID, InspLot:`$string InspLot, MfgDate:Date, Val:Value, RawVal:RawValue from res;
+    
+    stRevUpd:exec first MfgDate from `MfgDate xasc BatchMfgDateMap where MfgDate within (stPlot;enPlot), MfgDate &gt;= stRev;
+    enRevUpd:exec last MfgDate from `MfgDate xasc BatchMfgDateMap where MfgDate within (stPlot;enPlot), MfgDate &lt;= enRev;
+
+    res6:update frst:first BatchCode, val1:maxVal from res5 where BatchMfgDateMap[([]BatchCode:BatchCode);`MfgDate] = stRevUpd, i = first i;
+    res7:update frst:first BatchCode, val1:maxVal from res6 where BatchMfgDateMap[([]BatchCode:BatchCode);`MfgDate] = enRevUpd, i = last i;
+
+    stStatUpd:exec first MfgDate from `MfgDate xasc BatchMfgDateMap where MfgDate within (stPlot;enPlot), MfgDate &gt;= stStat;
+    enStatUpd:exec last MfgDate from `MfgDate xasc BatchMfgDateMap where MfgDate within (stPlot;enPlot), MfgDate &lt;= enStat;
+
+    res7:update lst:first BatchCode, val2:maxVal from res7 where BatchMfgDateMap[([]BatchCode:BatchCode);`MfgDate] = stStatUpd, i = first i;
+    res7:update lst:first BatchCode, val2:maxVal from res7 where BatchMfgDateMap[([]BatchCode:BatchCode);`MfgDate] = enStatUpd, i = last i;
+
+    //excluding batches/inspection lots
+    $[(not btCode ~0n) and (not batCom like "");
+       res7:delete from res7 where BatchCode in btCode;
+       0N!"No Comment Entered"
+    ];
+
+    $[(not inLot ~0n) and (not insCmt like "");  
+       res7:delete from res7 where InspLot in inLot;
+       0N!"No Comment Entered"
+    ];
+    :res7
+
+ 
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>dict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>inLot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>insCmt</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>maxVal</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

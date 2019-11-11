@@ -2,6 +2,7 @@
 	<ucname>delta_install_default</ucname>
 	<table>batchExc</table>
 	<description></description>
+	<keycol>btCde</keycol>
 	<column>
 		<column>dt</column>
 		<coltype>Timestamp</coltype>
@@ -18,7 +19,7 @@
 	</column>
 	<column>
 		<column>cmt</column>
-		<coltype>String</coltype>
+		<coltype>Symbol</coltype>
 		<default></default>
 		<attribute></attribute>
 		<description></description>

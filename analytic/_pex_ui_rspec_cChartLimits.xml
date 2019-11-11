@@ -1,0 +1,117 @@
+<analytic>
+	<analytic>.pex.ui.rspec.cChartLimits</analytic>
+	<code_text>{[dict;btCode;batCom;inLot;insCmt]
+
+    qaDict:dict;
+    .pac.aa:dict;
+    sID:dict[`sID];
+    matCode:dict[`matCode];
+    inspTy:dict[`inspTy];
+    att:dict[`att];
+    upp:dict[`upp];
+    lwr:dict[`lwr];
+    cl:dict[`cl];
+    stPlot:dict[`stPlot];
+    enPlot:dict[`enPlot];
+    stRev:dict[`stRev];
+    enRev:dict[`enRev];
+    uirl:dict[`uirl];
+    lirl:dict[`lirl];
+    uel:dict[`uel];
+    lel:dict[`lel];
+    stStat:dict[`stStat];
+    enStat:dict[`enStat];
+    
+    res:.pex.util.getQADataSet[qaDict];
+    res:select BatchCode:`$BatchID, InspLot:`$string InspLot, USL, LSL, CL, UIRL, LIRL, UEL, LEL, MfgDate:Date, Val:Value, RawVal:Value from res;
+     //OOE
+    if[(upp ~ 0n) and (lwr ~ 0n) and (cl ~ 0n); res1:res];
+    if[not (upp ~ 0n) and (lwr ~ 0n) and (cl ~ 0n); res1:update USL:upp, LSL:lwr, CL:cl from res];
+
+    //IRL
+    if[(uirl ~ 0n) and (lirl ~ 0n); res2:res1];
+    if[not (uirl ~ 0n) and (lirl ~ 0n); res2:update UIRL:uirl, LIRL:lirl from res1];
+    
+    //OOS
+    if[(uel ~ 0n) and (lel ~ 0n); res3:res2];
+    if[not (uel ~ 0n) and (lel ~ 0n); res3:update UEL:uel, LEL:lel from res2];
+     res4:res3;
+
+
+    res5:select from res4 where MfgDate within (stPlot;enPlot);
+
+    // PD - REMOVING NEXT 4 LINES
+    /res6:update frst:first BatchCode, val1:max Val from res5 where btchDt[([]BatchCode:BatchCode);`MfgDate] = stRev, Val= max Val;
+    /res7:update frst:first BatchCode, val1:max Val from res6 where btchDt[([]BatchCode:BatchCode);`MfgDate] = enRev, Val = max Val;
+
+    // PD - ADDING THESE LINES INSTEAD
+    stRevUpd:exec first MfgDate from `MfgDate xasc BatchMfgDateMap where  MfgDate within (stPlot;enPlot), MfgDate &gt;= stRev;
+    enRevUpd:exec last MfgDate from `MfgDate xasc BatchMfgDateMap where  MfgDate within (stPlot;enPlot), MfgDate &lt;= enRev;
+ 
+    res6:update frst:first BatchCode, val1:max Val from res5 where BatchMfgDateMap[([]BatchCode:BatchCode);`MfgDate] = stRevUpd, Val= max Val;
+    res7:update frst:first BatchCode, val1:max Val from res6 where BatchMfgDateMap[([]BatchCode:BatchCode);`MfgDate] = enRevUpd, Val = max Val;
+  
+    .pac.revP:res7;
+    /res7:update lst:first BatchCode, val2:max Val from res7 where btchDt[([]BatchCode:BatchCode);`MfgDate] = stStat, Val= max Val;
+    /res7:update lst:first BatchCode, val2:max Val from res7 where btchDt[([]BatchCode:BatchCode);`MfgDate] = enStat, Val = max Val;
+
+
+    //excluding batches/inspection lots
+    $[(not btCode ~0n) and (not batCom like "");  
+       res7:delete from res7 where BatchCode in btCode;
+      / 0N!"No Comment Entered"
+    ];
+
+    $[(not inLot ~0n) and (not insCmt like "");
+       res7:delete from res7 where InspLot in inLot;
+      / 0N!"No Comment Entered"
+    ];
+    :res7
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>dict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<param>
+		<parameter>inLot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>insCmt</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

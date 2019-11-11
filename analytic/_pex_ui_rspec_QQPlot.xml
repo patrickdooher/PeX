@@ -1,0 +1,87 @@
+<analytic>
+	<analytic>.pex.ui.rspec.QQPlot</analytic>
+	<code_text>{[dict;wi;he;btCode;batCom;inLot;insCmt]
+	qaDict:dict;
+    res:.pex.util.getQADataSet[qaDict];
+    fData:select BatchCode:`$BatchID, InspLot:`$string InspLot, MfgDate:Date, Val:Value from res;
+        
+    $[(not btCode ~0n) and (not batCom like "");
+       fData:delete from fData where BatchCode in btCode;
+       
+    ];
+    
+    $[(not inLot ~0n) and (not insCmt like "");
+       fData:delete from fData where InspLot in inLot;
+      
+    ];
+    
+    .pac.fData:fData; 
+    Rget "img &lt;- magick::image_graph(width = ",(string wi),", height = ",(string he),", res = 72)";
+    Rset ["qqTab";fData];
+    Rget "fQQ(qqTab)";  
+    Rget "dev.off()";
+    data: Rget "magick::image_data(img)";
+    :flip `width`height`data!(enlist wi;enlist he;enlist data)
+    
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>dict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<param>
+		<parameter>wi</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Integer</datatype>
+	</param>
+	<param>
+		<parameter>he</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Integer</datatype>
+	</param>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<param>
+		<parameter>inLot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>insCmt</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

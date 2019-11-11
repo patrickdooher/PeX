@@ -3,7 +3,7 @@
 	<displayName>PharmaXpert</displayName>
 	<description>{
   "creationDate": "Mon, 17 Jun 2019 14:28:21 GMT",
-  "lastUpdateDate": "Mon, 28 Oct 2019 14:58:35 GMT",
+  "lastUpdateDate": "Mon, 04 Nov 2019 16:56:45 GMT",
   "tags": [
     "defaultdash",
     "starred"
@@ -60,7 +60,7 @@
   "id": "1991d3c4-bd67-284f-40c3-e7b3f8f5791a",
   "name": "PharmaXpert",
   "creationDate": "Mon, 17 Jun 2019 14:28:21 GMT",
-  "lastUpdateDate": "Mon, 28 Oct 2019 14:58:35 GMT",
+  "lastUpdateDate": "Mon, 04 Nov 2019 16:56:45 GMT",
   "thumb": "data:image/png;base64,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",
   "screenDetails": [
     {
@@ -1406,7 +1406,7 @@
                                   "Actions": []
                                 },
                                 "Style": {
-                                  "advanced": "",
+                                  "advanced": "[data-widgetid=\"aaa1e88f-2c92-a764-489e-7a09b0b51c34\"] form.bbf-form &gt; div &gt; fieldset &gt; ul.flex-row &gt; li.bbf-field.field-bGdUeHQ &gt; div.bbf-editor.fillspace {\n    width:450px;\n}",
                                   "cssClasses": "",
                                   "minWidth": "",
                                   "display": "Row",
@@ -9047,7 +9047,7 @@
                                   "horizontal": "Center",
                                   "vertical": "Middle",
                                   "tooltip": "",
-                                  "AllowUnsafeContent": false,
+                                  "AllowUnsafeContent": true,
                                   "version": "4.2.0s2"
                                 },
                                 "Style": {
@@ -14808,7 +14808,7 @@
                       }
                     ],
                     "Selection": {
-                      "target_tab": 0,
+                      "target_tab": "5",
                       "unloadInactive": "",
                       "SetViewStateOnSelect": {
                         "ViewState": "",
@@ -35634,8 +35634,8 @@
                         "value": "glbSrJobs"
                       },
                       "FollowSelectedValue": true,
-                      "Actions": {
-                        "0": {
+                      "Actions": [
+                        {
                           "Current": "RspecName",
                           "Target": {
                             "_dashboardsType": "viewstate",
@@ -35645,7 +35645,7 @@
                           "TriggerColumn": "*",
                           "Trigger": "Click"
                         }
-                      }
+                      ]
                     }
                   },
                   "containerId": null,
@@ -36121,9 +36121,9 @@
   "dashboardTheme": "Light",
   "themeSwitchable": false,
   "saveTimestamp": null,
-  "relativeHeight": false,
-  "rowHeight": 25,
-  "colCount": 30,
+  "relativeHeight": true,
+  "rowCount": 51,
+  "colCount": 20,
   "floatable": false,
   "viewState": {
     ".settings": {
@@ -36236,7 +36236,7 @@
       },
       "component_33993": {
         "version": 0,
-        "Selection_target_tab": 0
+        "Selection_target_tab": 5
       },
       "component_2893": {
         "version": 0,
@@ -37989,7 +37989,7 @@
     "nme": {
       "_viewType": true,
       "_default": "",
-      "value": "20191028145713961299000.pdf",
+      "value": "",
       "_type": "symbol"
     },
     "user": {
@@ -38177,7 +38177,7 @@
     "SchedExecutionDate": {
       "_viewType": true,
       "_type": "date",
-      "value": "2020-01-26",
+      "value": "2020-02-02",
       "_default": "T+90",
       "_rolling": true
     },
@@ -47207,7 +47207,6 @@
       "_virtualQueryString": "function (selectedIds, myData, callback) {\n\n  var data,\n    sID2 = [],\n    matCode2 = [],\n    insTy2 = [],\n    mic2 = [],\n    att2 = [],\n    toReturn;\n\n  if (selectedIds.length &amp;&amp; myData &amp;&amp; myData.rows) {\n    //console.log(\"data: \", JSON.stringify(myData, 4,4));\n    \n    _.each(selectedIds, function (id) {\n      var found = _.find(myData.rows, { \"ix\": id });\n      if (found) {\n        sID2.push(found.SiteID);\n        matCode2.push(found.MaterialCode);\n        insTy2.push(found.insecTy);\n        mic2.push(found.InspGroups);\n        att2.push(found.Attribute);\n      }\n    });\n  }\n\n  toReturn = {\n      columns: [\"kkey\", \"vval\"],\n      meta: { \"kkey\": 11, \"vval\": 0 },\n      rows: [\n        { kkey: \"sID2\", vval: sID2 },\n        { kkey: \"matCode2\", vval: matCode2 },\n        { kkey: \"insTy2\", vval: insTy2 },\n        { kkey: \"mic2\", vval: mic2 },\n        { kkey: \"att2\", vval: att2 },\n      ]\n  };\n    \n  callback(toReturn);\n}"
     },
     "remove": {
-      "_pagingType": "NONE",
       "_autoExec": true,
       "_columns": [
         "ix3",
@@ -47229,7 +47228,7 @@
       },
       "_maxRows": 2000,
       "_forceReset": true,
-      "_subscriptionType": "polling",
+      "_subscriptionType": "static",
       "_subscriptionInterval": 3,
       "_layout": [
         {
@@ -47421,13 +47420,13 @@
           "weight": 2
         }
       ],
-      "_queryString": "{[qaDict]\n  //qaDict:()!();\n  //qaDict[`dummy]:(1 2 3;4 5 6 7;8;34);\n  site:qaDict[`site];\n    0N!site;\n  material:qaDict[`material];\n    0N!material;\n  inspectionType:qaDict[`inspectionType];\n    0N!inspectionType;\n  mic:qaDict[`mic];\n    0N!mic;\n  attribute:qaDict[`attribute];\n    0N!attribute;\n  stDt:qaDict[`stDt];\n    0N!stDt;\n  endDt:qaDict[`endDt];\n    0N!endDt;\n  //qaDict:qaDict _ `dummy;\n  .pex.util.getQADataSet[qaDict];\n\n  pdfData1::.pex.util.getQADataSet[qaDict];\n  save `$\":/home/kx_user/kxinstall/iText/tmp/pdfData1.csv\";\n    Rcmd \"rSpecData &lt;- fLoadData('/home/kx_user/kxinstall/iText/tmp/pdfData1.csv')\";\n    // Generate stats table \n      rStatRes:Rget \"fCPVplot(rSpecData,\\\"Stats\\\")\";\n      statsRes:(`$rStatRes[0][`names])!first each 0f^rStatRes[1]\n }\n\n\n/{[sID;matCode;inspTy;att]\n / 0N!sID;\n  /0N!matCode;\n  /0N!inspTy;\n  /0N!att;\n\n /res:select BatchCode, MfgDate:btchDt[([]BatchCode:BatchCode);`MfgDate], Val:OriginalVal, RawVal:OriginalVal from QA where excBt = 0b, excIn = 0b, SiteID in sID, MaterialCode in matCode, MasterInsp_SGO[([]InspCode:InspCode);`InspType] in inspTy, mmi[([]InspCode:InspCode);`Attribute] in att;\n \n /select mean:avg Val, sd:dev Val, mini:min Val, mx:max Val, rng:(max Val - min Val) from res\n \n / .pex.ui.Rspec.stat[sID;matCode;inspTy;att]\n /}",
+      "_queryString": "{[qaDict]\n  //qaDict:()!();\n  //qaDict[`dummy]:(1 2 3;4 5 6 7;8;34);\n  site:qaDict[`sID];\n    0N!site;\n  material:qaDict[`matCode];\n    0N!material;\n  inspectionType:qaDict[`inspTy];\n    0N!inspectionType;\n  /mic:qaDict[`mic];\n   / 0N!mic;\n  attribute:qaDict[`att];\n    0N!attribute;\n  stDt:qaDict[`stPlot];\n    0N!stDt;\n  endDt:qaDict[`enPlot];\n    0N!endDt;\n  //qaDict:qaDict _ `dummy;\n  .pex.util.getQADataSet[qaDict];\n\n  pdfData1::.pex.util.getQADataSet[qaDict];\n  save `$\":/home/kx_user/kxinstall/iText/tmp/pdfData1.csv\";\n    Rcmd \"rSpecData &lt;- fLoadData('/home/kx_user/kxinstall/iText/tmp/pdfData1.csv')\";\n    // Generate stats table \n      rStatRes:Rget \"fCPVplot(rSpecData,\\\"Stats\\\")\";\n      statsRes:(`$rStatRes[0][`names])!first each 0f^rStatRes[1]\n }\n\n\n/{[sID;matCode;inspTy;att]\n / 0N!sID;\n  /0N!matCode;\n  /0N!inspTy;\n  /0N!att;\n\n /res:select BatchCode, MfgDate:btchDt[([]BatchCode:BatchCode);`MfgDate], Val:OriginalVal, RawVal:OriginalVal from QA where excBt = 0b, excIn = 0b, SiteID in sID, MaterialCode in matCode, MasterInsp_SGO[([]InspCode:InspCode);`InspType] in inspTy, mmi[([]InspCode:InspCode);`Attribute] in att;\n \n /select mean:avg Val, sd:dev Val, mini:min Val, mx:max Val, rng:(max Val - min Val) from res\n \n / .pex.ui.Rspec.stat[sID;matCode;inspTy;att]\n /}",
       "_queryParams": [
         {
           "name": "qaDict",
           "index": 0,
           "type": "dict",
-          "value": "&lt;%qaDict%&gt;",
+          "value": "&lt;%dict%&gt;",
           "IsKdbParam": true,
           "isViewState": true
         }
@@ -57741,6 +57740,7 @@
       "_serverPaging": false
     },
     "placeholderSearchResults": {
+      "_pagingType": "NONE",
       "_autoExec": true,
       "_columns": [
         "ObjectType",
@@ -57792,6 +57792,7 @@
       "_serverPaging": false
     },
     "placeholderAdvancedSearch": {
+      "_pagingType": "NONE",
       "_autoExec": true,
       "_columns": [
         "unknown0"

@@ -1,0 +1,52 @@
+<analytic>
+	<analytic>.pex.ui.rspec.cChartScale</analytic>
+	<code_text>{[dict;btCode;batCom]
+    qaDict:dict;
+    res:.pex.util.getQADataSet[qaDict];
+    res:select distinct BatchCode:`$BatchID from res;
+     //excluding batches
+    $[(not btCode ~0n) and (not batCom like "");
+        
+       res:delete from res where BatchCode in btCode;
+      / 0N!"No Comment Entered"
+     ];
+    
+     /$[(not inLot ~0n) and (not insCmt like "");  
+      / res7:delete from res7 where InspLot in inLot;
+      / 0N!"No Comment Entered"
+     / ];
+    :res
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>dict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

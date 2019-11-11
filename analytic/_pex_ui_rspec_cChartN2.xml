@@ -1,0 +1,91 @@
+<analytic>
+	<analytic>.pex.ui.rspec.cChartN2</analytic>
+	<code_text>{[dict;btCode;batCom;inLot;insCmt]
+	
+   	qaDict:dict;
+    sID:dict[`sID];
+    matCode:dict[`matCode];
+    inspTy:dict[`inspTy];
+    att:dict[`att];
+    stPlot:dict[`stPlot];
+    enPlot:dict[`enPlot];
+    stRev:dict[`stRev];
+    enRev:dict[`enRev];
+    stStat:dict[`stStat];
+    enStat:dict[`enStat];
+    
+    res:.pex.util.getQADataSet[qaDict];
+    res7:select BatchCode:`$BatchID, InspLot:`$string InspLot, MfgDate:Date, Val:Value, RawVal:RawValue, avgval:avg Value, valvavg:Value&gt;avg Value, ascdescval:Value&gt;prev Value from res;
+     
+    $[(not btCode ~0n) and (not batCom like "");
+       res7:delete from res7 where BatchCode in btCode;
+       /0N!"No Comment Entered"
+    ];
+
+    $[(not inLot ~0n) and (not insCmt like "");
+       res7:delete from res7 where InspLot in inLot;
+       /0N!"No Comment Entered"
+    ];
+
+    res7:update ascdescval6:6 msum ascdescval, valvavg9:9 msum valvavg from res7;
+     if[not(count select from res7 where valvavg9 =9) ~0;
+            i9:exec i from res7 where valvavg9 = 9;
+        ];
+     if[not(count select from res7 where valvavg9 =9) ~0;
+           i9Highlight:distinct raze (-9+til 9)+/:i9;
+        ];
+     if[not(count select from res7 where valvavg9 =9) ~0;
+            res7:update valvavg9HL:1b from res7 where i in i9Highlight;
+        ];
+     if[not(count select from res7 where valvavg9 =9) ~0;
+            res7:update N2test:Val from res7 where valvavg9HL = 1b;
+        ];
+    :res7
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>dict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<param>
+		<parameter>inLot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>insCmt</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

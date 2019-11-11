@@ -1,0 +1,26 @@
+<analytic>
+	<analytic>.pex.ui.sched.confirm</analytic>
+	<code_text>{[jobID]
+	  if[jobID ~ `;x:0b];
+    if[not(jobID~`);x:1b];
+    ([]enlist jobVal:x)
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>jobID</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

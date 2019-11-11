@@ -1,0 +1,41 @@
+<analytic>
+	<analytic>.pex.ui.gbe.exclusion</analytic>
+	<code_text>{[btCode;batCom;att]
+	   $[(not btCode ~0n) and (not batCom like "");
+       update excBt:1b from `QA_Measurements where BatchCode in btCode, InspCodeAttMap[([]InspCode:InspCode);`Attribute] in att;
+           0N!"No Batch Comment Entered"
+    ]
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<param>
+		<parameter>att</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

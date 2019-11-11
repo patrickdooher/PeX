@@ -1,0 +1,56 @@
+<analytic>
+	<analytic>.pex.ui.sched.saveJob</analytic>
+	<code_text>{[SchedDict;rSpecID;submitButton]
+	if[1=1;
+    SchedKWord:SchedDict[`SchedKWord];
+    PlotFreq:SchedDict[`PlotFreq];
+    PlotPer:SchedDict[`PlotPer];
+    ReviewFreq:SchedDict[`ReviewFreq];
+    ReviewPer:SchedDict[`ReviewPer];
+    StatPer:SchedDict[`StatPer];
+    StatFreq:SchedDict[`StatFreq];
+    WaitPer:SchedDict[`WaitPer];
+    WaitFreq:SchedDict[`WaitFreq];
+    ExecutionDate:SchedDict[`ExecutionDate];
+    Description:SchedDict[`Desc];
+
+    
+    dictNewJob:`rSpecID`jobDescription`plotPer`plotPerFreq`revPer`revPerFreq`statPer`statPerFreq`waitPer`waitPerFreq`ExecutionDate`kWords!(rSpecID;Description;PlotPer;PlotFreq;ReviewPer;ReviewFreq;StatPer;StatFreq;WaitPer;WaitFreq;ExecutionDate;SchedKWord);
+  
+
+    if[not[(rSpecID ~ `) or (PlotPer ~ 0N) or (ReviewPer ~ 0N) or (StatPer ~ 0N) or (WaitPer ~ 0N)];[0N!`$"Job Added Successfully";x:.pex.job.ui.createNewJob[dictNewJob]]];
+    :([]`value;enlist x)]
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>SchedDict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<param>
+		<parameter>rSpecID</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>submitButton</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

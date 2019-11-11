@@ -2,40 +2,31 @@
 	<analytic>.pex.util</analytic>
 	<code_text>.pex.util.getQADataSet:{[qaDict]
 
-    // TODO - Add check to make sure all necessary keys to the dictionary are provided
-
-    site:qaDict[`site];
-    material:qaDict[`material];
-    inspectionType:qaDict[`inspectionType];
+    site:qaDict[`sID];
+    material:qaDict[`matCode];
+    inspectionType:qaDict[`inspTy];
     mic:qaDict[`mic];
-    attribute:qaDict[`attribute];
-    stDt:qaDict[`stDt];
-    endDt:qaDict[`endDt];
+    attribute:qaDict[`att];
+    stDt:qaDict[`stPlot];
+    endDt:qaDict[`enPlot];
 
-    // Can you pass in multiple sites/materials?
-    // Based om the site ID and materical code - get the Dosage and Anniversary from MasterMaterialOut_SGO - PD ASSUMES ONLY ONE ROW RETURNED?
+    
+    
     matMaster:select from MasterMaterialOut where SiteID = site, MaterialCode = material;
-    // Based om the site ID and materical code + Dosage and Anniversary gained above - get the InspCode and InspVersion - PD ASSUMES ONLY NE ROW RETURNED?
-   
     
     insDetails:select from MasterMattoInspMap where SiteID = site, MaterialCode = material, MaterialDosage=first matMaster[`Dosage] , MaterialAnniversary = first matMaster[`Anniversary], Attribute = attribute;
-    
-    
-    //insDetails:select from masToInsp where Attribute = `$"Attrib: Content uniformity by HPLC";
-    // Get the master limits (USL/LSL/ETC...) from MasterInsp_SGO given the InspCode and Inspec Version returned above - PD ASSUMES ONLY ONE ROW RETURNED
+   
     masInspec:select from MasterInsp where InspCode = first insDetails[`InspCode], Version =first insDetails[`InspVersion];
     masInspec:`InspCode xkey masInspec;
-    // Need to add check if limits have expired?
-
-    // Get list of batches - based on dates supplied
+    
     batchList:select from MasterBatchOut where MfgDate within (stDt;endDt), SiteID = site, MaterialCode = material, MaterialDosage=first matMaster[`Dosage], MaterialAnniversary = first matMaster[`Anniversary];
     batchListKey:`BatchCode xkey batchList;
 
     qaVals:select from QA_Measurements where
-        SiteID = site, MaterialCode = material, MaterialDosage=first matMaster[`Dosage], MaterialAnniversary = first matMaster[`Anniversary],
+        SiteID = site, MaterialCode = material, excBt = 0b, excIn = 0b, MaterialDosage=first matMaster[`Dosage], MaterialAnniversary = first matMaster[`Anniversary],
         BatchCode in batchList[`BatchCode], InspCode = first insDetails[`InspCode], InspVersion =first insDetails[`InspVersion];
-    // qaData:select BatchID:string BatchCode, Date:MaterialAnniversary,  RawValue:OriginalVal, Value:OriginalVal^NormVal, InspCode from qaVals;
-    qaData:select BatchID:string BatchCode, Date:batchListKey[([]BatchCode:BatchCode);`MfgDate],  RawValue:OriginalVal, Value:OriginalVal^NormVal, InspCode from qaVals;
+    
+    qaData:select BatchID:string BatchCode,InspLot, Date:batchListKey[([]BatchCode:BatchCode);`MfgDate],  RawValue:OriginalVal, Value:OriginalVal^NormVal, InspCode from qaVals;
     qaData1:`ord xcols update ord:`int$1+i, ex_calc:0i, annotation:0Ni,
         CL:masInspec[([]InspCode:InspCode);`CL],
         LEL:masInspec[([]InspCode:InspCode);`LEL],
@@ -77,7 +68,8 @@
 
     BatchMfgDateMap::`BatchCode xkey select BatchCode, MfgDate from MasterBatchOut;
     InspCodeAttMap::select last Attribute by InspCode from MasterMattoInspMap;
-
+    update excBt:0b, excIn:0b from `QA_Measurements;
+    MasterInsp::`InspCode xkey MasterInsp;
     };
 
 </code_text>

@@ -1,0 +1,19 @@
+<analytic>
+	<analytic>.pex.ui.gbe.runExcTab</analytic>
+	<code_text>{[]
+	InspGroupsTbl:`InspCode xkey select distinct InspGroups, InspCode, Attribute from MasterMattoInspMap;
+    select distinct BatchCode, SiteID, MaterialCode, InspTy:MasterInsp[([]InspCode:InspCode);`InspType], MIC:InspGroupsTbl[([]InspCode:InspCode);`InspGroups], Attribute:InspGroupsTbl[([]InspCode:InspCode);`Attribute] from QA_Measurements where excBt = 1b
+
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

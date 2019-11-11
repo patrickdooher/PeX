@@ -92,7 +92,7 @@
     username:dict[`username];
     userpass:dict[`userpass];
 
-    .log.out[.z.h;"Updating password for user ";(username;userpass)];
+    .log.out[.z.h;"Updating password for user ";(username)];
     res:.[.px.pm.resetPassword;(username;userpass);{(`err;x)}];
     if[res[0]~`err;
         .log.err[.z.h;"Unable to update password ";res[1]];

@@ -1,0 +1,42 @@
+<analytic>
+	<analytic>.pex.ui.rspec.stats</analytic>
+	<code_text>{[qaDict]
+	
+  site:qaDict[`site]; 
+  material:qaDict[`material];
+  inspectionType:qaDict[`inspectionType];
+  mic:qaDict[`mic];
+  attribute:qaDict[`attribute];
+  stDt:qaDict[`stDt];
+  endDt:qaDict[`endDt];
+    
+  .pex.util.getQADataSet[qaDict];
+
+  pdfData1::.pex.util.getQADataSet[qaDict];
+  save `$":/home/kx_user/kxinstall/iText/tmp/pdfData1.csv";
+    Rcmd "rSpecData &lt;- fLoadData('/home/kx_user/kxinstall/iText/tmp/pdfData1.csv')";
+  // Generate stats table 
+    rStatRes:Rget "fCPVplot(rSpecData,\"Stats\")";
+    statsRes:(`$rStatRes[0][`names])!first each 0f^rStatRes[1]
+ 
+
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>qaDict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

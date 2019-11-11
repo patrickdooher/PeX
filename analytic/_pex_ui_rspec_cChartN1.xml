@@ -1,0 +1,78 @@
+<analytic>
+	<analytic>.pex.ui.rspec.cChartN1</analytic>
+	<code_text>{[dict;btCode;batCom;inLot;insCmt]
+    qaDict:dict;
+    sID:dict[`sID];
+    matCode:dict[`matCode];
+    inspTy:dict[`inspTy];
+    att:dict[`att];
+    stPlot:dict[`stPlot];
+    enPlot:dict[`enPlot];
+    //might need to add floor to round number
+   
+    res:.pex.util.getQADataSet[qaDict];
+    res:select BatchCode:`$BatchID, InspLot:`$string InspLot, N1:avg Value+(3*dev Value), N11:avg Value-(3*dev Value), MfgDate:Date, Val:Value, RawVal:RawValue from res;
+    res7:select from res where MfgDate within (stPlot;enPlot);
+
+    //excluding batches/inspection lots
+    $[(not btCode ~0n) and (not batCom like "");
+       res7:delete from res7 where BatchCode in btCode;
+       /0N!"No Comment Entered"
+     ];
+
+    $[(not inLot ~0n) and (not insCmt like "");
+       res7:delete from res7 where InspLot in inLot;
+       /0N!"No Comment Entered"
+    ];
+
+    res7:update N1R:Val from res where Val &lt; N11;
+    res7:update N1R:Val from res where Val &gt; N1;
+    :res7
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>dict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<param>
+		<parameter>btCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>batCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<param>
+		<parameter>inLot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>insCmt</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

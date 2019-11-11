@@ -1,0 +1,50 @@
+<analytic>
+	<analytic>.pex.ui.sched.nextRuns</analytic>
+	<code_text>{[SchedDict;jobID;rSpecID]
+	
+    PlotPer:SchedDict[`PlotPer];;
+    ReviewPer:SchedDict[`ReviewPer];
+    StatPer:SchedDict[`StatPer];
+    WaitPer:SchedDict[`WaitPer];
+
+    jobID:"I"$ string jobID;
+
+    $[[(PlotPer ~ 0N) or (ReviewPer ~ 0N) or (StatPer ~ 0N) or (WaitPer ~ 0N) or (rSpecID ~ `)];
+        [jobID:0;res:.pex.job.getJobSchedule[jobID]];
+        [res:.pex.job.getJobSchedule[jobID]]
+        ];
+    select [-5] from res
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>SchedDict</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Dict</datatype>
+	</param>
+	<param>
+		<parameter>jobID</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<param>
+		<parameter>rSpecID</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

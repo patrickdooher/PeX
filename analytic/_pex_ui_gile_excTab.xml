@@ -1,0 +1,74 @@
+<analytic>
+	<analytic>.pex.ui.gile.excTab</analytic>
+	<code_text>{[sID;matCode;inspTy;mic;att]
+    InspGroupsTbl:`InspCode xkey select distinct InspGroups, InspCode, Attribute from MasterMattoInspMap;
+    res:select BatchCode, InspLot, SiteID, MaterialCode, InspCode, MaterialDosage, MIC:InspGroupsTbl[([]InspCode:InspCode);`InspGroups],Attribute:InspCodeAttMap[([]InspCode:InspCode);`Attribute], MfgDate:BatchMfgDateMap[([]BatchCode:BatchCode);`MfgDate] from QA_Measurements where SiteID in sID;
+  
+   
+    if[not matCode ~();
+        res:select from res where MaterialCode in matCode
+        ];
+
+    if[not inspTy ~();
+        res:select from res where MasterInsp_SGO[([]InspCode:InspCode);`InspType] in inspTy
+        ];
+    
+    if[not mic ~();
+        res:select from res where inspMap[([]InspCode:InspCode);`InspGroups] in mic
+        ];
+  
+    if[not att ~();
+        res:select from res where mmi[([]InspCode:InspCode);`Attribute] in att;
+        ];
+     bt:exec distinct BatchCode from res;
+    res2:`BatchCode xkey select BatchCode, BatchStatus from MasterBatchOut where BatchCode in bt;
+    res3:res lj res2;
+    update ixgeIn:i from res3
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>sID</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>matCode</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>inspTy</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>mic</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>att</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>

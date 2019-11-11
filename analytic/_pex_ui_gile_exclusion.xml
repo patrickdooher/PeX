@@ -1,0 +1,42 @@
+<analytic>
+	<analytic>.pex.ui.gile.exclusion</analytic>
+	<code_text>{[inLot;inspCom;att]
+    $[(not inLot ~0n) and (not inspCom like "");
+        update excIn:1b from `QA_Measurements where InspLot in "J"$string inLot, InspCodeAttMap[([]InspCode:InspCode);`Attribute] in att;
+        0N!"No Batch Comment Entered"
+        ]
+  
+	}</code_text>
+	<description></description>
+	<dictionaryparams>0</dictionaryparams>
+	<typ>Analytic</typ>
+	<private>0</private>
+	<returntype></returntype>
+	<returndata></returndata>
+	<defaultconnection></defaultconnection>
+	<alias></alias>
+	<analytictype></analytictype>
+	<returndescription></returndescription>
+	<param>
+		<parameter>inLot</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<param>
+		<parameter>inspCom</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>String</datatype>
+	</param>
+	<param>
+		<parameter>att</parameter>
+		<default></default>
+		<description>default parameter</description>
+		<required>1</required>
+		<datatype>Symbol[]</datatype>
+	</param>
+	<analyticgroup>PeX_UI_API</analyticgroup>
+</analytic>
